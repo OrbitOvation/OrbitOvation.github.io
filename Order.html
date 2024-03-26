@@ -200,25 +200,33 @@
       }
 
       // Initialize PayPal Button
-      paypal.Buttons({
-        createOrder: function(data, actions) {
-          return actions.order.create({
-            purchase_units: [{
-              amount: {
-                value: '1.00' // Placeholder amount, you can adjust this dynamically if needed
-              }
-            }]
-          });
-        },
-        onApprove: function(data, actions) {
-          return actions.order.capture().then(function(details) {
-            alert('Transaction completed by ' + details.payer.name.given_name + '! Thank you for your purchase.');
-            window.location.href = 'Infos.html'; // Redirect to Thanks.html
-
-          });
+      function updatePayPalButton() {
+            // Get the amount from the div
+            var amountText = document.getElementById('amount').innerText;
+            // Extract the numeric value from the text
+            var amount = parseFloat(amountText.replace(/[^\d.]/g, ''));
+            
+            // Render the PayPal button with the correct amount
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: amount // Set the amount here
+                            }
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        // Show a success message to the buyer
+                        alert('Transaction completed by ' + details.payer.name.given_name);
+                        // Call your server to save the transaction
+                        // sendTransactionToServer(data);
+                    });
+                }
+            }).render('#paypal-button-container');
         }
-      }).render('#paypal-button-container');
-
       // Add event listeners to checkboxes
       var checkboxes = document.querySelectorAll('input[type="checkbox"]');
       checkboxes.forEach(function(checkbox) {
@@ -266,6 +274,9 @@
       handleCheckboxChange(event, 1500);
     });
   });
+
+            updatePayPalButton();
+
 </script>
 
 </body>
