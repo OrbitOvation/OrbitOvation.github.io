@@ -200,33 +200,36 @@
       }
 
       // Initialize PayPal Button
-      function updatePayPalButton() {
-            // Get the amount from the div
-            var amountText = document.getElementById('amount').innerText;
-            // Extract the numeric value from the text
-            var amount = parseFloat(amountText.replace(/[^\d.]/g, ''));
-            
-            // Render the PayPal button with the correct amount
-            paypal.Buttons({
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: amount // Set the amount here
-                            }
-                        }]
-                    });
-                },
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        // Show a success message to the buyer
-                        alert('Transaction completed by ' + details.payer.name.given_name);
-                        // Call your server to save the transaction
-                        // sendTransactionToServer(data);
-                    });
-                }
-            }).render('#paypal-button-container');
+     
+// Replace 'YOUR_CLIENT_ID' with your PayPal client ID
+
+// Function to set PayPal button value
+function setPayPalButtonValue(amount) {
+    paypal.Buttons({
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: amount // Set the amount dynamically
+                    }
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                alert('Transaction completed by ' + details.payer.name.given_name);
+                // Redirect or perform any other actions upon successful transaction completion
+            });
         }
+    }).render('#paypal-button-container');
+}
+
+// Get the amount value from the div and remove non-numeric characters
+var amountString = document.getElementById('amount').innerText;
+var amountValue = parseFloat(amountString.replace(/[^0-9.-]+/g,""));
+
+// Set PayPal button value
+setPayPalButtonValue(amountValue);
       // Add event listeners to checkboxes
       var checkboxes = document.querySelectorAll('input[type="checkbox"]');
       checkboxes.forEach(function(checkbox) {
