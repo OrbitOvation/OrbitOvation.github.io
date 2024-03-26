@@ -195,42 +195,7 @@
 
 
   <script>
-
-     document.addEventListener('DOMContentLoaded', function() {
-      // Function to update the displayed number
-      function updateNumber() {
-        var checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
-        document.getElementById('amount').textContent = checkedBoxes > 0 ? checkedBoxes + ' checkbox(es) checked' : 'No checkboxes checked';
-      }
-
-      // Initialize PayPal Button
-      paypal.Buttons({
-        createOrder: function(data, actions) {
-          return actions.order.create({
-            purchase_units: [{
-              amount: {
-                value: '1.00' // Placeholder amount, you can adjust this dynamically if needed
-              }
-            }]
-          });
-        },
-        onApprove: function(data, actions) {
-          return actions.order.capture().then(function(details) {
-            alert('Transaction completed by ' + details.payer.name.given_name + '! Thank you for your purchase.');
-            window.location.href = 'Infos.html'; // Redirect to Thanks.html
-
-          });
-        }
-      }).render('#paypal-button-container');
-
-      // Add event listeners to checkboxes
-      var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-      checkboxes.forEach(function(checkbox) {
-        checkbox.addEventListener('change', updateNumber);
-      });
-    });
-    
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     // Function to update the displayed number
     function updateNumber(amount) {
       document.getElementById('amount').textContent = amount.toFixed(2) + 'Kr';
@@ -250,24 +215,51 @@
     }
 
     // Add event listeners to checkboxes
-    document.getElementById('checkbox1').addEventListener('change', function(event) {
+    document.getElementById('checkbox1').addEventListener('change', function (event) {
       handleCheckboxChange(event, 6500);
     });
 
-    document.getElementById('checkbox2').addEventListener('change', function(event) {
+    document.getElementById('checkbox2').addEventListener('change', function (event) {
       handleCheckboxChange(event, 5000);
     });
 
-    document.getElementById('checkbox3').addEventListener('change', function(event) {
+    document.getElementById('checkbox3').addEventListener('change', function (event) {
       handleCheckboxChange(event, 5000);
     });
 
-    document.getElementById('checkbox4').addEventListener('change', function(event) {
+    document.getElementById('checkbox4').addEventListener('change', function (event) {
       handleCheckboxChange(event, 1500);
     });
 
-    document.getElementById('checkbox5').addEventListener('change', function(event) {
+    document.getElementById('checkbox5').addEventListener('change', function (event) {
       handleCheckboxChange(event, 1500);
+    });
+
+    // Initialize company name variable
+    var companyName = '';
+
+    // Function to handle form input
+    document.getElementById('companyName').addEventListener('input', function (event) {
+      companyName = event.target.value;
+    });
+
+    // Function to handle form submission
+    document.getElementById('orderForm').addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent default form submission
+      var orderInfo = 'Order Information:\n';
+      orderInfo += 'Company Name, Website, or Address: ' + companyName + '\n';
+      orderInfo += '-----------------------------------\n';
+      orderInfo += 'Selected Options:\n';
+      orderInfo += document.getElementById('checkbox1').checked ? 'Incorporate a website into the project\n' : '';
+      orderInfo += document.getElementById('checkbox2').checked ? 'Integrate social media advertisements into the campaign\n' : '';
+      orderInfo += document.getElementById('checkbox3').checked ? 'Feature custom-edited videos of the store\n' : '';
+      orderInfo += document.getElementById('checkbox4').checked ? 'Prefer to utilize existing logo and company name\n' : '';
+      orderInfo += document.getElementById('checkbox5').checked ? 'Interested in receiving a trophy\n' : '';
+
+      // Log or send order information as needed
+      console.log(orderInfo);
+
+      // Proceed with PayPal checkout or other actions
     });
   });
 </script>
