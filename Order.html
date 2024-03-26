@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="images/Logo.png" type="image/x-icon">
+  <title>OrbitOvation</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,600,700&display=swap" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+  <link href="css/responsive.css" rel="stylesheet" />
+
+  <style>
+     .container-fluid {
+      flex: 1;
+    }
+
+    .footer_section {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      z-index: 1000;
+      /* Ensures footer is above other content */
+      padding: 20px 0;
+      /* Adjust padding as needed */
+    }
+
+ ::-webkit-scrollbar {
+    display: none;
+}
+
+  body{
+        background-color: #000000;
+
+  }
+    
+    .btn-boxs{
+      width: 10px;
+       display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 30px;
+      width: 180px;
+  text-align: center;
+  margin: 5px;
+       display: inline-block;
+  padding: 10px 35px;
+  background-color: #ffffff;
+  color: #000000;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  border: 1px solid transparent;
+       background-color: transparent;
+  border-color: #ffffff;
+  color: #ffffff;
+       display: inline-block;
+  padding: 10px 35px;
+  background-color: #f1db25;
+  color: #ffffff;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  border: 1px solid transparent;
+      background-color: transparent;
+  border-color: #fff;
+  color: #f1db25;
+    }
+
+  .checkbox-container {
+  border: 2px solid #333; /* border style */
+  background-color: #222; /* dark background color */
+  padding: 20px; /* add some padding for better appearance */
+  border-radius: 10px; /* optional: add border-radius for rounded corners */
+  max-width: 400px; /* adjust the max-width as needed */
+  margin: 0 auto; /* center the container horizontally */
+}
+
+.number-container {
+  border: 2px solid #fff; /* border style */
+  text-align: center;
+  padding: 10px; /* add some padding for better appearance */
+  border-radius: 10px; /* optional: add border-radius for rounded corners */
+  max-width: 100px; /* adjust the max-width as needed */
+  margin: 20px auto; /* center the container horizontally */
+  color: #fff;
+}
+
+  </style>
+</head>
+<body>
+  <div class="hero_area">
+    <div class="hero_bg_box">
+      <div class="img-box">
+        <img src="images/Bg_Ev.png" >
+      </div>
+    </div>
+
+    <header class="header_section">
+      <div class="header_top">
+        <div class="container-fluid">
+          <div class="contact_link-container">
+            <a href="" class="contact_link1">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span>
+                Malmö
+              </span>
+            </a>
+            
+            <a href="" class="contact_link3">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <span>
+                OrbitOvation@gmail.com
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="header_bottom">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg custom_nav-container">
+            <a class="navbar-brand" href="index.html">
+              <span>
+                OrbitOvation
+              </span>
+            </a>
+        
+          </nav>
+        </div>
+      </div>
+    </header>
+    <section class=" slider_section ">
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+           <div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="checkbox-container">
+        <form>
+          <div class="form-group">
+            <input type="checkbox" id="checkbox1" name="checkbox1">
+            <label for="checkbox1">"Would you like to incorporate a website into the project?"</label>
+          </div>
+          <div class="form-group">
+            <input type="checkbox" id="checkbox2" name="checkbox2">
+            <label for="checkbox2">Are you interested in integrating social media advertisements into the campaign?</label>
+          </div>
+          <div class="form-group">
+            <input type="checkbox" id="checkbox3" name="checkbox3">
+            <label for="checkbox3">Are you interested in featuring custom-edited videos of your store?</label>
+          </div>
+          <div class="form-group">
+            <input type="checkbox" id="checkbox4" name="checkbox4">
+            <label for="checkbox4">Would you prefer to utilize your current logo and existing company name, or are you open to the creation of a new logo and brand identity?</label>
+          </div>
+          <div class="form-group">
+            <input type="checkbox" id="checkbox5" name="checkbox5">
+            <label for="checkbox5">Would you be interested in receiving a trophy as a token of appreciation?</label>
+          </div>
+          <div class="number-container" id="amount">0.00Kr</div>
+          <div id="paypal-button-container"></div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <footer class="container-fluid footer_section">
+    <p>
+      &copy; <span id="currentYear"></span> All Rights Reserved. Design by Ali</a>
+    </p>
+  </footer>
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=AVzq-kHFWYoJnEp-Vbc4RC2NoszSwN6OPsujQloQJ8Ki1JbEgIhKjGFWN9tmbDkJkPv-oTnqJn9zIGMA&currency=SEK"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/custom.js"></script>
+
+
+  <script>
+
+     document.addEventListener('DOMContentLoaded', function() {
+      // Function to update the displayed number
+      function updateNumber() {
+        var checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
+        document.getElementById('amount').textContent = checkedBoxes > 0 ? checkedBoxes + ' checkbox(es) checked' : 'No checkboxes checked';
+      }
+
+      // Initialize PayPal Button
+      paypal.Buttons({
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: '1.00' // Placeholder amount, you can adjust this dynamically if needed
+              }
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            alert('Transaction completed by ' + details.payer.name.given_name + '! Thank you for your purchase.');
+            window.location.href = 'Infos.html'; // Redirect to Thanks.html
+
+          });
+        }
+      }).render('#paypal-button-container');
+
+      // Add event listeners to checkboxes
+      var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', updateNumber);
+      });
+    });
+    
+  document.addEventListener('DOMContentLoaded', function() {
+    // Function to update the displayed number
+    function updateNumber(amount) {
+      document.getElementById('amount').textContent = amount.toFixed(2) + 'Kr';
+    }
+
+    // Initialize the total amount
+    var totalAmount = 0;
+
+    // Function to handle checkbox changes
+    function handleCheckboxChange(event, amountToAdd) {
+      if (event.target.checked) {
+        totalAmount += amountToAdd;
+      } else {
+        totalAmount -= amountToAdd;
+      }
+      updateNumber(totalAmount);
+    }
+
+    // Add event listeners to checkboxes
+    document.getElementById('checkbox1').addEventListener('change', function(event) {
+      handleCheckboxChange(event, 5000);
+    });
+
+    document.getElementById('checkbox2').addEventListener('change', function(event) {
+      handleCheckboxChange(event, 3500);
+    });
+
+    document.getElementById('checkbox3').addEventListener('change', function(event) {
+      handleCheckboxChange(event, 2500);
+    });
+
+    document.getElementById('checkbox4').addEventListener('change', function(event) {
+      handleCheckboxChange(event, 500);
+    });
+
+    document.getElementById('checkbox5').addEventListener('change', function(event) {
+      handleCheckboxChange(event, 1000);
+    });
+  });
+</script>
+
+</body>
+
+</html>
