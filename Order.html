@@ -194,98 +194,78 @@
 
 
   <script>
+ document.addEventListener('DOMContentLoaded', function() {
+  // Initialize the total amount
+  var totalAmount = 0;
+  var paypalButtonRendered = false; // To track whether PayPal button is rendered or not
 
-     document.addEventListener('DOMContentLoaded', function() {
-      // Function to update the displayed number
-      function updateNumber() {
-        var checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
-        document.getElementById('amount').textContent = checkedBoxes > 0 ? checkedBoxes + ' checkbox(es) checked' : 'No checkboxes checked';
-      }
+  // Function to update the displayed number and PayPal button
+  function updateNumber(amount) {
+    var amountText = amount.toFixed(2) + 'Kr';
+    document.getElementById('amount').textContent = amountText;
 
-      // Initialize PayPal Button
-     
-// Replace 'YOUR_CLIENT_ID' with your PayPal client ID
+    // Render PayPal button only if it's not already rendered
+    if (!paypalButtonRendered) {
+      paypalButtonRendered = true;
+      renderPayPalButton(amount);
+    }
+  }
 
-// Function to set PayPal button value
-function setPayPalButtonValue(amount) {
+  // Function to render the PayPal button
+  function renderPayPalButton(amount) {
     paypal.Buttons({
-        createOrder: function(data, actions) {
-            return actions.order.create({
-                purchase_units: [{
-                    amount: {
-                        value: amount // Set the amount dynamically
-                    }
-                }]
-            });
-        },
-        onApprove: function(data, actions) {
-            return actions.order.capture().then(function(details) {
-                alert('Transaction completed by ' + details.payer.name.given_name);
-                // Redirect or perform any other actions upon successful transaction completion
-                window.location.replace('Infos.html');
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: totalAmount,
+              currency_code: 'SEK'
+            }
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          alert('Transaction completed by ' + details.payer.name.given_name + '! Your payment ID is: ' + details.id);
 
-            });
-        }
-    }).render('#paypal-button-container');
-}
-
-// Get the amount value from the div and remove non-numeric characters
-var amountString = document.getElementById('amount').innerText;
-var amountValue = parseFloat(amountString.replace(/[^0-9.-]+/g,""));
-
-// Set PayPal button value
-setPayPalButtonValue(amountValue);
-      // Add event listeners to checkboxes
-      var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-      checkboxes.forEach(function(checkbox) {
-        checkbox.addEventListener('change', updateNumber);
-      });
-    });
-    
-  document.addEventListener('DOMContentLoaded', function() {
-    // Function to update the displayed number
-    function updateNumber(amount) {
-      document.getElementById('amount').textContent = amount.toFixed(2) + 'Kr';
-    }
-
-    // Initialize the total amount
-    var totalAmount = 0;
-
-    // Function to handle checkbox changes
-    function handleCheckboxChange(event, amountToAdd) {
-      if (event.target.checked) {
-        totalAmount += amountToAdd;
-      } else {
-        totalAmount -= amountToAdd;
+        });
       }
-      updateNumber(totalAmount);
+    }).render('#paypal-button-container');
+  }
+
+  // Function to handle checkbox changes
+  function handleCheckboxChange(event, amountToAdd) {
+    if (event.target.checked) {
+      totalAmount += amountToAdd;
+    } else {
+      totalAmount -= amountToAdd;
     }
+    updateNumber(totalAmount);
+  }
 
-    // Add event listeners to checkboxes
-    document.getElementById('checkbox1').addEventListener('change', function(event) {
-      handleCheckboxChange(event, 6500);
-    });
-
-    document.getElementById('checkbox2').addEventListener('change', function(event) {
-      handleCheckboxChange(event, 5000);
-    });
-
-    document.getElementById('checkbox3').addEventListener('change', function(event) {
-      handleCheckboxChange(event, 5000);
-    });
-
-    document.getElementById('checkbox4').addEventListener('change', function(event) {
-      handleCheckboxChange(event, 1500);
-    });
-
-    document.getElementById('checkbox5').addEventListener('change', function(event) {
-      handleCheckboxChange(event, 1500);
-    });
+  // Add event listeners to checkboxes
+  document.getElementById('checkbox1').addEventListener('change', function(event) {
+    handleCheckboxChange(event,  8000);
   });
 
-            updatePayPalButton();
+  document.getElementById('checkbox2').addEventListener('change', function(event) {
+    handleCheckboxChange(event, 7000);
+  });
 
-</script>
+  document.getElementById('checkbox3').addEventListener('change', function(event) {
+    handleCheckboxChange(event, 5000);
+  });
+
+  document.getElementById('checkbox4').addEventListener('change', function(event) {
+    handleCheckboxChange(event, 1500);
+  });
+
+  document.getElementById('checkbox5').addEventListener('change', function(event) {
+    handleCheckboxChange(event, 1500);
+  });
+});
+
+  </script>
 
 </body>
 
